@@ -1,12 +1,15 @@
-/* Token Radar's plain theme. The five palette values, two radii and two families are the whole style;
-   everything else is spacing, a hairline and a type step. */
+/* Token Radar's theme: warm paper, dark ink, one burnt-orange signal colour.
+   The palette, two radii and two families are the whole style; everything else
+   is spacing, a hairline and a type step. */
 :root {
-  --canvas: #f2f5f3;
-  --surface: #ffffff;
-  --ink: #16211c;
-  --muted: #5f6f67;
-  --border: #d8e2dc;
-  --accent: #0f7a5a;
+  --canvas: #f6f3ec;
+  --surface: #fffdf7;
+  --ink: #1d1a16;
+  --muted: #6f675c;
+  --border: #e2dccc;
+  --accent: #b64a12;
+  --accent-soft: #f7e8dc;
+  --positive: #0f7a5a;
   --negative: #b23b2e;
   --radius-control: 8px;
   --radius-panel: 14px;
@@ -31,9 +34,9 @@ body {
   text-wrap: pretty;
 }
 h1, h2, h3 { margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
-h1 { font-size: 30px; line-height: 1.15; font-weight: 600; }
-h2 { font-size: 20px; line-height: 1.2; font-weight: 600; }
-h3 { font-size: 16px; line-height: 1.25; font-weight: 600; }
+h1 { font-size: 30px; line-height: 1.15; font-weight: 650; }
+h2 { font-size: 20px; line-height: 1.2; font-weight: 650; }
+h3 { font-size: 16px; line-height: 1.25; font-weight: 650; }
 p { margin: 0; }
 button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
@@ -67,51 +70,59 @@ a { color: var(--accent); }
 .field label { color: var(--muted); font-size: 12px; }
 .field input, .field select {
   min-height: 36px; padding: 0 var(--step-3); border: 1px solid var(--border); border-radius: var(--radius-control);
-  background: var(--surface); min-width: 180px;
+  background: var(--surface); min-width: 160px;
 }
-.field input { min-width: 280px; }
+.field input { min-width: 260px; }
 .tabs { display: flex; gap: var(--step-1); padding: 3px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); }
 .tabs button { min-height: 30px; padding: 0 var(--step-3); border: 0; border-radius: 6px; background: transparent; color: var(--muted); }
 .tabs button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
 .count { margin-left: auto; color: var(--muted); font-size: 13px; align-self: center; }
 
 .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-panel); overflow: hidden; }
-.table-wrap { overflow-x: auto; }
+.table-wrap { overflow-x: auto; max-height: 720px; overflow-y: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 14px; }
 th, td { padding: var(--step-3) var(--step-3); border-bottom: 1px solid var(--border); text-align: left; vertical-align: middle; }
+thead th { position: sticky; top: 0; background: var(--surface); z-index: 2; box-shadow: 0 1px 0 var(--border); }
 th { color: var(--muted); font-size: 12px; font-weight: 500; white-space: nowrap; }
 th button { display: inline-flex; align-items: center; gap: var(--step-1); border: 0; background: none; padding: 0; color: inherit; font: inherit; }
 th button:hover { color: var(--ink); }
 tbody tr { cursor: pointer; }
-tbody tr:hover { background: var(--surface); }
-tbody tr[data-selected="true"] { background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+tbody tr:nth-child(even) { background: #fbf8f1; }
+tbody tr:hover { background: var(--accent-soft); }
+tbody tr[data-selected="true"] { background: var(--accent-soft); }
 .num { font-family: var(--font-num); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .name { display: grid; gap: 2px; }
 .name b { font-weight: 600; }
 .sub { color: var(--muted); font-size: 12px; }
-.pos { color: var(--accent); }
+.pos { color: var(--positive); }
 .neg { color: var(--negative); }
-.bar { width: 120px; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--border) 60%, var(--surface)); overflow: hidden; }
+.bar { width: 120px; height: 6px; border-radius: 3px; background: #eee7d8; overflow: hidden; }
 .bar i { display: block; height: 100%; background: var(--accent); }
 .implied { display: flex; align-items: center; gap: var(--step-2); }
 .status { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; white-space: nowrap; }
 .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.badge {
+  display: inline-block; padding: 1px var(--step-2); border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 600;
+}
+.badge.early { background: #efe9db; color: var(--muted); }
 
 .model { margin-top: var(--step-4); padding: var(--step-5); display: grid; gap: var(--step-3); }
 .formula { font-family: var(--font-num); font-size: 13px; line-height: 1.7; color: var(--muted); overflow-wrap: anywhere; }
+.footnote { margin-top: var(--step-4); color: var(--muted); font-size: 12px; }
 .empty { padding: var(--step-7) var(--step-5); text-align: center; display: grid; gap: var(--step-3); justify-items: center; }
 .empty p { color: var(--muted); }
 .button { min-height: 36px; padding: 0 var(--step-4); border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); }
 .button.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
 
 .detail {
-  position: fixed; top: 0; right: 0; bottom: 0; width: min(520px, 92vw); z-index: 10;
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(560px, 94vw); z-index: 10;
   background: var(--surface); border-left: 1px solid var(--border); padding: var(--step-5);
   overflow-y: auto; transform: translateX(0); transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
 }
 .detail[hidden] { display: none; }
 .detail { margin: 0 0 0 auto; max-height: 100%; }
-.detail::backdrop { background: rgba(22, 33, 28, 0.28); }
+.detail::backdrop { background: rgba(29, 26, 22, 0.28); }
 .detail-head { display: flex; align-items: start; justify-content: space-between; gap: var(--step-4); }
 .detail-head > div { min-width: 0; }
 .detail-head .sub { overflow-wrap: anywhere; }
@@ -123,10 +134,13 @@ tbody tr[data-selected="true"] { background: color-mix(in srgb, var(--accent) 8%
 .equation { display: grid; gap: var(--step-2); font-family: var(--font-num); font-size: 13px; }
 .equation div { display: flex; justify-content: space-between; gap: var(--step-3); }
 .equation span { color: var(--muted); }
+.equation .total { border-top: 1px solid var(--border); padding-top: var(--step-2); }
+.equation .total b { font-size: 15px; }
 .steps { margin: 0; padding-left: var(--step-5); display: grid; gap: var(--step-3); }
 .steps li { padding-left: var(--step-1); }
 .steps b { display: block; font-weight: 500; }
 .cost { color: var(--muted); font-size: 12px; font-family: var(--font-num); }
+.why { margin-top: var(--step-3); color: var(--muted); font-size: 13px; }
 
 @media (max-width: 900px) {
   .shell { padding: var(--step-4); }
